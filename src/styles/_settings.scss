@@ -1,0 +1,23 @@
+$color-marron: #a9907e;
+$color-beige: #f3deba;
+$color-vert: #abc4aa;
+$color-marron-fonce: #675d50;
+
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: white;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+h1 {
+  color: $color-vert;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 4rem;
+}

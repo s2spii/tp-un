@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Card from "./components/Card";
 
-function App() {
+const App = () => {
+  const [recipes, setRecipe] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("https://www.themealdb.com/api/json/v1/1/search.php?s=" + search)
+      .then((res) => setRecipe(res.data.meals));
+  }, [search]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>React Cook</h1>
+      <div className="form__group field">
+        <input
+          type="text"
+          className="form__field"
+          placeholder="Name"
+          name="name"
+          id="name"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <label htmlFor="name" className="form__label">
+          Name
+        </label>
+      </div>
+      <ul className="recipe-container">
+        {recipes &&
+          recipes.map((recipe, index) => <Card recipe={recipe} key={index} />)}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;
